@@ -1,0 +1,45 @@
+ 1.create database employee_db;
+ 2.create table employee_salary (emp_id int primary key,first_name varchar(40),last_name varchar(40),salary int,joining_date date,department varchar(20));
+ 3. create table reward (id int primary key,ref_id int,reward_date date,amount int, foreign key(ref_id) references employee_salary(emp_id));
+ 4. insert into employee_salary values(1,'Bob','Kinto',100000,'2019-1-20','Finance');
+ 5. insert into reward values(1,1,'2019-05-11',1000);
+ 
+ 
+ 1.select * from employee_salary
+ 2.select * from reward
+ 3.select first_name as Employee_name from employee_salary;
+ 4.select LOWER(last_name) from employee_salary;
+ 5.select substr(first_name,1,4) from employee_salary;
+ 6.select position('h' in 'jhon');
+ 7.select rtrim(first_name) from employee_salary;
+ 8.Select concat(first_name,'_',last_name) as name from employee_salary;
+ 9.select year(joining_date),month(joining_date),day(joining_date) from employee_salary;
+10.select * from employee_salary order by first_name asc;
+11.select * from employee_salary order by first_name asc,salary desc;
+12.SELECT * FROM employee_salary WHERE First_name IN ('Bob','Alex');
+13.SELECT * FROM employee_salary WHERE First_name="Bob";
+14.SELECT * FROM employee_salary where last_name like 'k%';
+15.SELECT * FROM employee_salary where first_name like '%n';
+16.select * from employee_salary where salary between 200000 and 800000;
+17.select * from employee_salary where joining_date>'2019-3-31';
+18.select convert(DATE_FORMAT(joining_date,'%Y-%m-%d-%H:%i:00'),DATETIME) FROM employee_salary;
+19.select R.reward_date - E.joining_date from employee_salary E inner join reward R on E.emp_id=R.Ref_id;
+20.select now();
+21.SELECT department, SUM(salary) AS total  FROM employee_salary  GROUP BY department;
+22.SELECT department, SUM(salary) AS total  FROM employee_salary  GROUP BY department  order by total desc;
+23.SELECT department,count(department)as 'Number Of Employee', SUM(salary) AS total  FROM employee_salary  GROUP BY department  order by t
+otal desc;
+24.SELECT department,avg(salary) as 'AverageSalary' FROM employee_salary  GROUP BY department order by AverageSalary asc;
+25.SELECT department,min(salary) as 'AverageSalary' FROM employee_salary  GROUP BY department order by AverageSalary asc;
+26.select count(first_name),year(joining_date),month(joining_date) from employee_salary group by year(joining_date), month(joining_date);
+27.select department,sum(salary) as ' totalsalary' from employee_salary group by department having sum(salary)>800000 order by totalsalary
+ desc;
+28.SELECT * FROM employee_salary inner join reward on employee_salary.emp_id=ref_id;
+29.select first_name, case first_name when 'John' then salary*0.2 when 'Roy' then salary*0.10 else salary*0.15 end "deduced_amount" from   employee_salary;
+30.select first_name,case department when 'IT' then 'IT Services' when 'Finance' then 'Financial Services' when 'Banking' then 'Banking Services' end as "department" from employee_salary;
+31.delete from employee_salary where emp_id in (select ref_id from reward);
+32.select employee_salary.first_name, reward.amount from employee_salary inner join reward on employee_salary.emp_id=reward.ref_id;
+33.update reward inner join employee_salary on employee_salary.emp_id=reward.ref_id set reward.amount=1000 where employee_salary.emp_id=1;
+34.select employee_salary.first_name, reward.amount from employee_salary inner join reward on employee_salary.emp_id=reward.ref_id where reward.amount>2000;
+35.select employee_salary.first_name,reward.amount from employee_salary left join reward on employee_salary.emp_id=reward.ref_id;
+

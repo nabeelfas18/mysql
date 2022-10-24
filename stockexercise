@@ -1,0 +1,13 @@
+create table stocks(id int primary key,Item_code int,item_name varchar(20),Manufactural_code varchar(20),Quantity int,Unit_price int,Expire_date date);
+
+insert into stocks values(1,101,'Bat','ABC',10,200,'2022-10-01');
+
+1.select * from stocks where Expire_date='2022-10-11';
+2.select * from stocks where Quantity=0;
+3.delete from stocks where Expire_date='2022-10-01';
+4.update stocks set Unit_price=Unit_price*0.10;
+5.select item_name from stocks where Quantity>100;
+6.select * from stocks where Expire_date='2022-10-14' order by id desc;
+7.alter table stocks add re_order varchar(50);
+8.update stocks set re_order=quantity-quantity*0.1;
+
